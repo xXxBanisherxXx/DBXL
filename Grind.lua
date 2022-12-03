@@ -1,7 +1,7 @@
 local Marketplace = game:GetService('MarketplaceService')
 local Player = game.Players.LocalPlayer
 local TweenService = game:service"TweenService";
-local Info = TweenInfo.new(5,Enum.EasingStyle.Quad);
+local Info = TweenInfo.new(15,Enum.EasingStyle.Quad);
 
 
 function sendwebhook()
