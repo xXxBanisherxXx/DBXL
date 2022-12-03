@@ -124,7 +124,11 @@ if game.PlaceId == game.PlaceId then
 	Tab:AddButton({
 		Name = "Teleport to Kaio",
 		Callback = function()
+			if game.PlaceId == 4748429613 then
+			tp(-479.316528, 3198.57788, -10069.5693, 1, 0, 0, 0, 1, 0, 0, 0, 1);
+			else
 			tp(5234.24316, 363.164673, -7374.52002, 1, 0, 0, 0, 1, 0, 0, 0, 1);
+			end
 		end
 
 	})
