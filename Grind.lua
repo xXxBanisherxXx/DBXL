@@ -91,7 +91,7 @@ if game.PlaceId == game.PlaceId then
 	Tab:AddButton({
 		Name = "Kill NPC",
 		Callback = function()
-			local NPCFind = game.Workspace:FindFirstChild(NPC)
+			local NPCFind = game.Workspace:FindFirstChild(NPC) or game.Players:FindFirstChild(NPC).Character
 			if NPCFind then
 				local HeadFind = NPCFind:FindFirstChild('Head')
 				if HeadFind then
