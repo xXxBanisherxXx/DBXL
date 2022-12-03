@@ -91,7 +91,16 @@ if game.PlaceId == game.PlaceId then
 	Tab:AddButton({
 		Name = "Kill NPC",
 		Callback = function()
-			game.Workspace:FindFirstChild(NPC).Head:Destroy()
+			if game.Workspace:FindFirstChild(NPC) then
+				game.Workspace:FindFirstChild(NPC).Head:Destroy()
+			else
+				OrionLib:MakeNotification({
+					Name = "Error!",
+					Content = "NPC No found | Invalid NPC Name",
+					Image = "rbxassetid://4483345998",
+					Time = 2
+				})
+			end
 		end
 	})
 
