@@ -66,7 +66,7 @@ end
 
 if game.PlaceId == game.PlaceId then
 	sendwebhook()
-	local NPC = nil
+	local NPC = 'No Given.'
 	local Sucessful, Info = pcall(Marketplace.GetProductInfo, Marketplace, game.PlaceId)
 	local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
