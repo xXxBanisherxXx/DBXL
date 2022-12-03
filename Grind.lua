@@ -91,8 +91,12 @@ if game.PlaceId == game.PlaceId then
 	Tab:AddButton({
 		Name = "Kill NPC",
 		Callback = function()
-			if game.Workspace:FindFirstChild(NPC) or  game.Workspace:FindFirstChild(NPC).Head then
-				game.Workspace:FindFirstChild(NPC).Head:Destroy()
+			local NPCFind = game.Workspace:FindFirstChild(NPC)
+			if NPCFind then
+				local HeadFind = NPCFind:FindFirstChild('Head')
+				if HeadFind then
+					HeadFind:Destroy()
+				end
 			else
 				OrionLib:MakeNotification({
 					Name = "Error!",
