@@ -1,5 +1,3 @@
-function Load()
+if game.PlaceId == 1186465433 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/xXxBanisherxXx/Scripts/main/DBXL.lua"))()
 end
-
-Load()
