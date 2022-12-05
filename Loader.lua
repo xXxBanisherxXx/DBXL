@@ -1,6 +1,5 @@
 function Load(File)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/xXxBanisherxXx/Scripts/main/'..File));
-	return;
 end
 
 
