@@ -10,7 +10,7 @@ function SendWebhook()
 		["title"] = "__**New execution.**__",
 		["description"] = "Name: "..Player.Name.."\nDisplay Name: "..Player.DisplayName.."\nExploit: "..identifyexecutor().."\nGame: https://www.roblox.com/games/"..game.PlaceId,
 		["type"] = "rich",
-		["color"] = tonumber(0xffff00),
+		["color"] = tonumber(0xffffff),
 		["thumbnail"] = {
 			["url"] = "https://www.roblox.com/asset-thumbnail/image?assetId="..game.PlaceId.."&width=768&height=432"
 		},
